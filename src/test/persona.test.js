@@ -2,11 +2,11 @@
 const FuncPersona = require('../functions/persona');
 
 const events = {
-    httpMethod: 'POST',
-    body: JSON.stringify({
-        name: 'rogelio',
-        last_name: 'suclupe'
-    }),
+    pathParameters : {operacion : 'consultanotificacion'},
+    resource: 'personas/{id}',
+    httpMethod : 'GET',
+    body : JSON.stringify({
+    })
 };
 
 const callback = (e, m) => {

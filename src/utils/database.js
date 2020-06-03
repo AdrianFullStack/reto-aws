@@ -15,21 +15,9 @@ module.exports.create = (params, callback) => {
     dynamoDb.put(params, (error) => {
         if (error) {
             console.log(error)
-            response.error(error, callback)
-            /*return callback(null, {
-                statusCode: error.statusCode || 501,
-                headers: { 'Content-Type': 'text/plain' },
-                body: 'Error no se pudo crear el registro.',
-            });*/
+            return response.error(error, callback)
         }
-
-        response.success(params.Item)
-
-        /*const response = {
-            statusCode: 201,
-            body: JSON.stringify(params.Item),
-        };
-        return callback(null, response);*/
+        return response.success(params.Item, callback)
     });
 }
 
@@ -37,21 +25,8 @@ module.exports.list = (params, callback) => {
     dynamoDb.scan(params, (error, result) => {
         if (error) {
             console.error(error);
-            response.error(error, callback)
-
-            /*return callback(null, {
-                statusCode: error.statusCode || 501,
-                headers: { 'Content-Type': 'text/plain' },
-                body: 'No se pudo obtener todo los registros.',
-            });*/
+            return response.error(error, callback)
         }
-
-        response.success(params.Items)
-
-        /*const response = {
-            statusCode: 200,
-            body: JSON.stringify(result.Items),
-        };
-        return callback(null, response);*/
+        return response.success(result.Items, callback)
     });
 }

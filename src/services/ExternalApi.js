@@ -3,7 +3,7 @@ const axios = require('axios')
 const attr_person = require('../utils/cast_attr_person')
 
 class ExternalApi {
-    static async call() {
+    static async call(id) {
         let response = {
             payload: {},
             status: {
@@ -13,7 +13,7 @@ class ExternalApi {
 
         try {
             let data = {};
-            let _response = await axios.get('https://swapi.py4e.com/api/people/1');
+            let _response = await axios.get(`https://swapi.py4e.com/api/people/${id}`);
             Object.entries(_response.data).forEach(([key, value]) => {
                 if (attr_person[key] != undefined) {
                     data[attr_person[key]] = value
@@ -24,9 +24,7 @@ class ExternalApi {
             console.log('* ExternalApi *');
             response.status.success = false;
             if(e) {
-                response.status.error = {
-                    messages: e.toString()
-                };
+                response.status.error = e;
             }
         }
 

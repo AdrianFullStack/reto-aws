@@ -10,22 +10,21 @@ const params = {
 };
 
 class PersonaRepository {
-    static create(body, callback) {
-        externalApi.call().then((data) => {
-            if (data.status.success) {
-                params.Item = param.setParameters(data.payload)
-                return database.create(params, callback)
+    static clone(id, callback) {
+        externalApi.call(id).then((data) => {
+            if (!data.status.success) {
+                return response.error(data.status.error, callback)
             }
-            else{
-                return callback(null, {
-                    statusCode: 501,
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: data.status.error.messages,
-                });
-            }
+            params.Item = param.setParameters(data.payload)
+            return database.create(params, callback)
         }).catch(error => {
-            response.error(error, callback)
+            return response.error(error, callback)
         })
+    }
+
+    static create(body, callback) {
+        params.Item = param.setParameters(body)
+        return database.create(params, callback)
     }
 
     static list(callback) {

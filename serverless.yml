@@ -25,15 +25,22 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.PERSONA_TABLE}"
 
 functions:
-  apiPersona:
-    handler: src/functions/persona.handler
+  postPersona:
+    handler: src/functions/persona.post
     events:
       - http:
           path: personas
           method: post
           cors: true
+  getPersona:
+    handler: src/functions/persona.get
+    events:
       - http:
           path: personas
+          method: get
+          cors: true
+      - http:
+          path: personas/{id}
           method: get
           cors: true
 
