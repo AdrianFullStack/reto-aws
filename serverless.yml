@@ -11,8 +11,6 @@ package:
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: adrianfullstack
-  region: sa-east-1
   environment:
     PERSONA_TABLE: personas
   iamRoleStatements:
