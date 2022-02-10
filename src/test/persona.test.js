@@ -20,9 +20,9 @@ const events = {
 const callback = (e, m) => {
     if (e) console.error(e);
     if (m) {
-        console.log('************ Respuesta Servicio *****************')
+        console.log('************ Respuesta Servicio ******************')
         console.log(m);
-        console.log('*************************************************')
+        console.log('**************************************************')
     };
 };
 
